@@ -1,13 +1,18 @@
 package com.typingfast.app.controller;
 
+import com.typingfast.app.dto.AuthResponse;
 import com.typingfast.app.dto.LoginRequest;
-import com.typingfast.app.dto.LoginResponse;
 import com.typingfast.app.dto.SignupRequest;
 import com.typingfast.app.entity.User;
 import com.typingfast.app.repository.UserRepository;
+import com.typingfast.app.service.JwtService;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +20,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @CrossOrigin
 public class AuthController {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthController(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService,
+            AuthenticationManager authenticationManager,
+            UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
     }
 
     // SIGN UP
@@ -32,7 +49,7 @@ public class AuthController {
         }
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest().body("Email already present ");
+            return ResponseEntity.badRequest().body("Email already present");
         }
 
         User user = User.builder()
@@ -43,24 +60,47 @@ public class AuthController {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok(user);
+        // Generate token for the new user
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        String token = jwtService.generateToken(userDetails);
+
+        AuthResponse response = AuthResponse.builder()
+                .token(token)
+                .userId(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .message("User registered successfully")
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
     // LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
-        User user = userRepository.findByUsername(request.getUsername()).orElse(null);
-
-        if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getUsername(),
+                            request.getPassword()));
+        } catch (Exception e) {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
 
-        // Return user details for frontend to store
-        LoginResponse response = LoginResponse.builder()
+        User user = userRepository.findByUsername(request.getUsername()).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        String token = jwtService.generateToken(userDetails);
+
+        AuthResponse response = AuthResponse.builder()
+                .token(token)
                 .userId(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .message("Login successfully")
+                .message("Login successful")
                 .build();
 
         return ResponseEntity.ok(response);
