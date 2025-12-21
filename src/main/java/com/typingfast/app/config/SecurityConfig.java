@@ -8,19 +8,20 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/api/typing/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults());
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http
+                                .csrf(csrf -> csrf.disable())
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers(
+                                                                "/api/auth/**",
+                                                                "/api/typing/**")
+                                                .permitAll()
+                                                // Dashboard endpoints require authentication
+                                                .requestMatchers("/api/dashboard/**").authenticated()
+                                                .anyRequest().authenticated())
+                                .httpBasic(Customizer.withDefaults());
 
-        return http.build();
-    }
+                return http.build();
+        }
 }

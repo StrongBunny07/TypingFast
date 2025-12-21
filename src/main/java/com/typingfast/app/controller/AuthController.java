@@ -1,12 +1,12 @@
 package com.typingfast.app.controller;
 
 import com.typingfast.app.dto.LoginRequest;
+import com.typingfast.app.dto.LoginResponse;
 import com.typingfast.app.dto.SignupRequest;
 import com.typingfast.app.entity.User;
 import com.typingfast.app.repository.UserRepository;
 
 import jakarta.validation.Valid;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +23,15 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    //SIGN UP
+    // SIGN UP
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest request) {
 
-        if(userRepository.findByUsername(request.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username already exists");
         }
 
-        if(userRepository.findByEmail(request.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().body("Email already present ");
         }
 
@@ -43,19 +43,26 @@ public class AuthController {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok("User register succesfully");
+        return ResponseEntity.ok(user);
     }
 
-    //LOGIN
+    // LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername()).orElse(null);
 
-        if(user == null || !passwordEncoder.matches(request.getPassword(),user.getPassword()))  {
+        if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
 
-        return ResponseEntity.ok("Login successfully");
-    }
+        // Return user details for frontend to store
+        LoginResponse response = LoginResponse.builder()
+                .userId(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .message("Login successfully")
+                .build();
 
+        return ResponseEntity.ok(response);
+    }
 }
