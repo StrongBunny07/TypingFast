@@ -12,8 +12,8 @@ import type {
     TypingHistory,
 } from '../types';
 
-// API Base URL - Change this to your Spring Boot backend URL
-const API_BASE_URL = 'http://localhost:8080/api';
+// API Base URL - Production Railway backend
+const API_BASE_URL = 'https://typingfast.up.railway.app/api';
 
 // Create axios instance
 const api = axios.create({
