@@ -1,0 +1,79 @@
+# =============================================================================
+# TypingFast - Local Development Docker Compose
+# =============================================================================
+# Usage:
+#   Start:   docker-compose up -d --build
+#   Stop:    docker-compose down
+#   Logs:    docker-compose logs -f app
+#   Rebuild: docker-compose up -d --build --force-recreate
+# =============================================================================
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: typingfast-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: typingfast
+      MYSQL_USER: typinguser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3307:3306"  # Use 3307 to avoid conflict with local MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d  # Auto-initialize database
+    networks:
+      - typingfast-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # Spring Boot Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: typingfast-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Server configuration
+      PORT: 8080
+      
+      # Database configuration (using service name 'db' instead of localhost)
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/typingfast?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: typinguser
+      SPRING_DATASOURCE_PASSWORD: password
+      
+      # JPA configuration
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      
+      # JWT configuration (override for production)
+      JWT_SECRET: YourSuperSecretKeyForJWTTokenGenerationMustBeAtLeast256BitsLong123456789
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8080:8080"
+    networks:
+      - typingfast-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  typingfast-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

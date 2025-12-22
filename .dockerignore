@@ -1,0 +1,49 @@
+# =============================================================================
+# Docker Ignore File - Exclude unnecessary files from Docker build context
+# =============================================================================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Maven
+target/
+!target/*.jar
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+HELP.md
+*.md
+
+# Local configuration
+*.local
+.env.local
+.env*.local
+
+# Frontend (if not needed in backend container)
+frontend/
+node_modules/
+
+# Test files
+src/test/
+
+# Docker files (don't copy into context)
+Dockerfile*
+docker-compose*
+.dockerignore
