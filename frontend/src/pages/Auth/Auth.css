@@ -15,6 +15,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--radius-2xl);
     padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-lg);
 }
 
 .auth-header {
@@ -25,6 +26,10 @@
 .auth-header h1 {
     font-size: 1.75rem;
     margin-bottom: var(--spacing-sm);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .auth-header p {
@@ -90,12 +95,12 @@
 }
 
 .auth-footer a {
-    color: var(--primary-400);
+    color: var(--secondary-400);
     font-weight: 500;
 }
 
 .auth-footer a:hover {
-    color: var(--primary-300);
+    color: var(--secondary-500);
     text-decoration: underline;
 }
 

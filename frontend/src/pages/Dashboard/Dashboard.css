@@ -22,7 +22,7 @@
 
 .loading-container svg,
 .error-container svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
 }
 
 /* Header */
@@ -91,12 +91,12 @@
 }
 
 .stat-card.highlight {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
-    border-color: rgba(139, 92, 246, 0.3);
+    background: linear-gradient(135deg, rgba(93, 173, 226, 0.1) 0%, rgba(243, 156, 107, 0.1) 100%);
+    border-color: rgba(93, 173, 226, 0.3);
 }
 
 .stat-card.highlight .stat-icon {
-    background: var(--gradient-primary);
+    background: var(--gradient-accent);
 }
 
 .stat-card.highlight .stat-icon svg {
@@ -115,7 +115,7 @@
 }
 
 .stat-icon svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
 }
 
 .stat-content {
@@ -149,7 +149,7 @@
 }
 
 .section-header h2 svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
 }
 
 /* Recent Performance */
@@ -214,7 +214,7 @@
 }
 
 .empty-history svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
     opacity: 0.5;
 }
 
@@ -246,16 +246,16 @@
 }
 
 .history-table tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(93, 173, 226, 0.05);
 }
 
 .wpm-badge {
     display: inline-block;
     padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(139, 92, 246, 0.15);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    background: rgba(93, 173, 226, 0.15);
+    border: 1px solid rgba(93, 173, 226, 0.3);
     border-radius: var(--radius-sm);
-    color: var(--primary-400);
+    color: var(--secondary-400);
     font-weight: 600;
 }
 
@@ -273,9 +273,9 @@
 }
 
 .accuracy-badge.medium {
-    background: rgba(251, 191, 36, 0.15);
-    border: 1px solid rgba(251, 191, 36, 0.3);
-    color: var(--warning-400);
+    background: rgba(243, 156, 107, 0.15);
+    border: 1px solid rgba(243, 156, 107, 0.3);
+    color: var(--accent-400);
 }
 
 .accuracy-badge.low {

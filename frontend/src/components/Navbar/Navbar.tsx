@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Keyboard, User, LogOut, BarChart3, Zap } from 'lucide-react';
+import { User, LogOut, BarChart3, Zap, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import './Navbar.css';
 
 export const Navbar = () => {
     const { isAuthenticated, user, logout } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -17,12 +19,11 @@ export const Navbar = () => {
             <div className="navbar-container">
                 {/* Logo */}
                 <Link to="/" className="navbar-logo">
-                    <div className="logo-icon">
-                        <Keyboard size={24} />
-                    </div>
-                    <span className="logo-text">
-                        Typing<span className="logo-accent">Fast</span>
-                    </span>
+                    <img
+                        src="/Typing_Fast-removebg-preview.png"
+                        alt="TypingFast"
+                        className="logo-image"
+                    />
                 </Link>
 
                 {/* Navigation Links */}
@@ -61,6 +62,15 @@ export const Navbar = () => {
                             </Link>
                         </>
                     )}
+
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={toggleTheme}
+                        className="btn btn-icon theme-toggle"
+                        aria-label="Toggle theme"
+                    >
+                        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                    </button>
                 </div>
             </div>
         </nav>

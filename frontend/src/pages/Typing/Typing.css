@@ -45,6 +45,7 @@
 .word-btn:hover {
     background: var(--bg-card-hover);
     color: var(--text-primary);
+    border-color: var(--secondary-400);
 }
 
 .word-btn.active {
@@ -99,7 +100,7 @@
 }
 
 .live-stat svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
 }
 
 .live-stat .stat-value {
@@ -139,8 +140,8 @@
 }
 
 .typing-area:focus-within {
-    border-color: var(--primary-500);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15), var(--shadow-glow);
+    border-color: var(--secondary-400);
+    box-shadow: 0 0 0 3px rgba(93, 173, 226, 0.2), var(--shadow-glow);
 }
 
 .typing-area.loading {
@@ -158,7 +159,7 @@
 }
 
 .loading-spinner svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
 }
 
 .text-display {
@@ -220,7 +221,7 @@
 }
 
 .trophy-icon {
-    color: var(--warning-400);
+    color: var(--accent-400);
     margin-bottom: var(--spacing-md);
     animation: bounce 1s ease;
 }
@@ -264,7 +265,7 @@
 }
 
 .result-card svg {
-    color: var(--primary-400);
+    color: var(--secondary-400);
 }
 
 .result-card.error-card svg {
