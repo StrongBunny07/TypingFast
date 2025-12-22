@@ -205,7 +205,7 @@ export const Home = () => {
                             <span>TypingFast</span>
                         </div>
                         <p className="footer-text">
-                            © 2024 TypingFast. Practice makes perfect.
+                            © 2025 TypingFast. Practice makes perfect.
                         </p>
                     </div>
                 </div>
