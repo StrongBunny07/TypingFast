@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="screenshots/logo-full.svg" alt="TypingFast Logo" width="300"/>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot"/>
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
@@ -15,15 +19,12 @@
 </p>
 
 <p align="center">
-  <a href="https://thetypingfast.vercel.app">🌐 Live Demo</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-contributing">Contributing</a>
+  <a href="https://thetypingfast.vercel.app">
+    <img src="https://img.shields.io/badge/🔗_Live_Demo-Visit_Here-blue?style=for-the-badge" alt="Live Demo"/>
+  </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="MIT License"/>
   <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"/>
   <img src="https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg?style=flat-square" alt="Open Source"/>
 </p>
@@ -35,19 +36,44 @@
 ### 🏠 Landing Page
 A clean, modern landing page with an interactive keyboard animation to get you started.
 
+<p align="center">
+  <img src="screenshots/landing-page.png" alt="Landing Page" width="800"/>
+</p>
+
+### 📝 Sign Up
+Create an account to track your progress and compete with others.
+
+<p align="center">
+  <img src="screenshots/signup.png" alt="Sign Up" width="800"/>
+</p>
+
 ### ⌨️ Typing Practice
 Practice with customizable word counts (15, 30, 50, or 100 words) and track your WPM, accuracy, and time in real-time.
 
-### 📊 Dashboard
-View your comprehensive statistics including:
-- **Best WPM** - Your highest typing speed
-- **Average WPM** - Your overall performance
-- **Best Accuracy** - Your most accurate test
-- **Total Tests** - Number of tests completed
-- **Recent Performance** - Stats from your last 10 tests
+<p align="center">
+  <img src="screenshots/typing-practice.png" alt="Typing Practice" width="800"/>
+</p>
 
 ### 🏆 Test Complete
 Get detailed results after each test with WPM, accuracy, errors, and time taken.
+
+<p align="center">
+  <img src="screenshots/test-complete.png" alt="Test Complete" width="800"/>
+</p>
+
+### 📊 Dashboard (Dark Mode)
+View your comprehensive statistics including Best WPM, Average WPM, Accuracy, Total Tests, and Recent Performance.
+
+<p align="center">
+  <img src="screenshots/dashboard-dark.png" alt="Dashboard Dark Mode" width="800"/>
+</p>
+
+### 📊 Dashboard (Light Mode)
+The same powerful dashboard with a clean light theme.
+
+<p align="center">
+  <img src="screenshots/dashboard-light.png" alt="Dashboard Light Mode" width="800"/>
+</p>
 
 ---
 
@@ -236,28 +262,6 @@ We love contributions! TypingFast is **open source** and we welcome developers o
 ### 📋 Code of Conduct
 
 Please be respectful and inclusive. We're all here to learn and build something awesome together!
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-```
-MIT License
-
-Copyright (c) 2025 TypingFast
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
 
 ---
 
