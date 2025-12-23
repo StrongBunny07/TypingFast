@@ -259,10 +259,6 @@ We love contributions! TypingFast is **open source** and we welcome developers o
 - ⚡ **Performance** - Help us make it faster
 - 🌐 **Translations** - Help localize the app
 
-### 📋 Code of Conduct
-
-Please be respectful and inclusive. We're all here to learn and build something awesome together!
-
 ---
 
 ## 🙏 Acknowledgments
