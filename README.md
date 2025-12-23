@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white" alt="Railway"/>
 </p>
 
-<h1 align="center">⌨️ TypingFast</h1>
+<h1 align="center">TypingFast</h1>
 
 <p align="center">
   <strong>Master Your Typing Speed</strong><br/>
@@ -31,44 +31,44 @@
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
-### 🏠 Landing Page
+###  Landing Page
 A clean, modern landing page with an interactive keyboard animation to get you started.
 
 <p align="center">
   <img src="screenshots/landing-page.png" alt="Landing Page" width="800"/>
 </p>
 
-### 📝 Sign Up
+###  Sign Up
 Create an account to track your progress and compete with others.
 
 <p align="center">
   <img src="screenshots/signup.png" alt="Sign Up" width="800"/>
 </p>
 
-### ⌨️ Typing Practice
+###  Typing Practice
 Practice with customizable word counts (15, 30, 50, or 100 words) and track your WPM, accuracy, and time in real-time.
 
 <p align="center">
   <img src="screenshots/typing-practice.png" alt="Typing Practice" width="800"/>
 </p>
 
-### 🏆 Test Complete
+###  Test Complete
 Get detailed results after each test with WPM, accuracy, errors, and time taken.
 
 <p align="center">
   <img src="screenshots/test-complete.png" alt="Test Complete" width="800"/>
 </p>
 
-### 📊 Dashboard (Dark Mode)
+###  Dashboard (Dark Mode)
 View your comprehensive statistics including Best WPM, Average WPM, Accuracy, Total Tests, and Recent Performance.
 
 <p align="center">
   <img src="screenshots/dashboard-dark.png" alt="Dashboard Dark Mode" width="800"/>
 </p>
 
-### 📊 Dashboard (Light Mode)
+###  Dashboard (Light Mode)
 The same powerful dashboard with a clean light theme.
 
 <p align="center">
@@ -77,15 +77,15 @@ The same powerful dashboard with a clean light theme.
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🎯 **Real-time Typing Tests** - Practice with randomly generated text
-- 📈 **Performance Tracking** - Track your WPM, accuracy, and errors
-- 📊 **Personal Dashboard** - View your progress and statistics over time
-- 🔐 **User Authentication** - Secure login/signup with JWT
-- 🌙 **Dark/Light Mode** - Toggle between themes for comfortable typing
-- 📱 **Responsive Design** - Works seamlessly on desktop and mobile
-- ⚡ **Customizable Tests** - Choose between 15, 30, 50, or 100 words
+-  **Real-time Typing Tests** - Practice with randomly generated text
+-  **Performance Tracking** - Track your WPM, accuracy, and errors
+-  **Personal Dashboard** - View your progress and statistics over time
+-  **User Authentication** - Secure login/signup with JWT
+-  **Dark/Light Mode** - Toggle between themes for comfortable typing
+-  **Responsive Design** - Works seamlessly on desktop and mobile
+-  **Customizable Tests** - Choose between 15, 30, 50, or 100 words
 
 ---
 
@@ -115,7 +115,7 @@ The same powerful dashboard with a clean light theme.
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -124,7 +124,7 @@ The same powerful dashboard with a clean light theme.
 - **Docker** (optional) - [Download](https://docker.com/)
 - **MySQL** - [Download](https://mysql.com/)
 
-### 🐳 Quick Start with Docker
+###  Quick Start with Docker
 
 ```bash
 # Clone the repository
@@ -139,7 +139,7 @@ The application will be available at:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:8080`
 
-### 💻 Manual Setup
+###  Manual Setup
 
 #### Backend Setup
 
@@ -167,7 +167,7 @@ npm install
 npm run dev
 ```
 
-### ⚙️ Environment Variables
+###  Environment Variables
 
 Create a `.env` file in the root directory:
 
@@ -183,37 +183,7 @@ JWT_SECRET=your_super_secret_key
 
 ---
 
-## 📁 Project Structure
-
-```
-TypingFast/
-├── 📂 src/                    # Spring Boot backend source
-│   ├── 📂 main/
-│   │   ├── 📂 java/
-│   │   │   └── 📂 com/typingfast/app/
-│   │   │       ├── 📂 config/       # Configuration classes
-│   │   │       ├── 📂 controller/   # REST API endpoints
-│   │   │       ├── 📂 model/        # Entity classes
-│   │   │       ├── 📂 repository/   # Data access layer
-│   │   │       ├── 📂 security/     # JWT & authentication
-│   │   │       └── 📂 service/      # Business logic
-│   │   └── 📂 resources/
-│   │       └── application.properties
-├── 📂 frontend/               # React frontend
-│   ├── 📂 src/
-│   │   ├── 📂 components/     # Reusable UI components
-│   │   ├── 📂 pages/          # Page components
-│   │   ├── 📂 context/        # React context providers
-│   │   └── 📂 services/       # API service layer
-├── 📂 init-db/                # Database initialization scripts
-├── 📄 docker-compose.yml      # Docker orchestration
-├── 📄 Dockerfile              # Backend Docker image
-└── 📄 pom.xml                 # Maven dependencies
-```
-
----
-
-## 🤝 Contributing
+##  Contributing
 
 We love contributions! TypingFast is **open source** and we welcome developers of all skill levels to help make it better.
 
@@ -250,27 +220,9 @@ We love contributions! TypingFast is **open source** and we welcome developers o
    - Select your fork and branch
    - Describe your changes
 
-### 💡 Contribution Ideas
-
-- 🐛 **Bug Fixes** - Found a bug? Help us squash it!
-- ✨ **New Features** - Have an idea? We'd love to hear it!
-- 📝 **Documentation** - Help improve our docs
-- 🎨 **UI/UX Improvements** - Make the app more beautiful
-- ⚡ **Performance** - Help us make it faster
-- 🌐 **Translations** - Help localize the app
-
----
-
-## 🙏 Acknowledgments
-
-- Thanks to all our [contributors](https://github.com/StrongBunny07/TypingFast/graphs/contributors)
-- Inspired by typing practice platforms like MonkeyType and TypeRacer
-- Built with ❤️ using Spring Boot and React
-
----
 
 <p align="center">
-  <strong>⭐ Star this repo if you find it helpful!</strong>
+  <strong>Star this repo if you find it helpful!</strong>
 </p>
 
 <p align="center">
