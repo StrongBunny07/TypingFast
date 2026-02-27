@@ -16,7 +16,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/typing")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class TypingController {
 
     private final TypingTextService textService;
