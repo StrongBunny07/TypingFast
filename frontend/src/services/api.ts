@@ -12,8 +12,8 @@ import type {
     TypingHistory,
 } from '../types';
 
-// API Base URL - Production Railway backend
-const API_BASE_URL = 'https://typingfast.up.railway.app/api';
+// API Base URL (configure via .env files)
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api';
 
 // Create axios instance
 const api = axios.create({
