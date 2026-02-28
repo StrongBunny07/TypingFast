@@ -172,23 +172,17 @@
 
 .hidden-input {
     position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    pointer-events: none;
+    background: transparent;
+    border: 0;
+    color: transparent;
+    caret-color: transparent;
+    pointer-events: auto;
 }
 
-.start-hint {
-    position: absolute;
-    bottom: var(--spacing-lg);
-    left: 50%;
-    transform: translateX(-50%);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-full);
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    animation: pulse 2s ease-in-out infinite;
-}
 
 /* Progress Bar */
 .progress-bar {
@@ -322,5 +316,30 @@
 
     .results-actions {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .typing-page {
+        padding: calc(64px + var(--spacing-lg)) var(--spacing-md) var(--spacing-lg);
+    }
+
+    .typing-area {
+        padding: var(--spacing-lg);
+        min-height: 180px;
+    }
+
+    .text-display {
+        font-size: 1.125rem;
+        line-height: 1.8;
+    }
+
+    .typing-header {
+        gap: var(--spacing-sm);
+    }
+
+    .word-selector {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }

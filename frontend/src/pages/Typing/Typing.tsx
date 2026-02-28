@@ -80,6 +80,46 @@ export const Typing = () => {
     }, [isStarted, isFinished, startTime]);
 
     // Handle input change
+    const handleFinish = async (finalTypedText?: string) => {
+        const completedText = finalTypedText ?? typedText;
+
+        setIsFinished(true);
+        if (timerRef.current) {
+            clearInterval(timerRef.current);
+        }
+
+        const duration = Math.floor((Date.now() - startTime) / 1000);
+        setElapsedTime(duration);
+
+        try {
+            const response = await typingApi.submitResult({
+                originalText: text,
+                typedText: completedText,
+                duration: duration,
+            });
+            setResult(response);
+        } catch (err) {
+            // Calculate locally if API fails
+            let errors = 0;
+            for (let i = 0; i < text.length; i += 1) {
+                if (completedText[i] !== text[i]) {
+                    errors += 1;
+                }
+            }
+
+            const correctChars = text.length - errors;
+            const accuracy = (correctChars / text.length) * 100;
+            const wpm = duration > 0 ? (correctChars / 5) / (duration / 60) : 0;
+
+            setResult({
+                wpm: Math.round(wpm * 100) / 100,
+                accuracy: Math.round(accuracy * 100) / 100,
+                errors,
+                correctedChars: correctChars,
+            });
+        }
+    };
+
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (isFinished || isLoading) return;
@@ -116,8 +156,9 @@ export const Typing = () => {
                 e.preventDefault();
                 const expectedChar = text[currentIndex];
                 const isCorrect = e.key === expectedChar;
+                const nextTypedText = typedText + e.key;
 
-                setTypedText((prev) => prev + e.key);
+                setTypedText(nextTypedText);
 
                 setCharStates((prev) =>
                     prev.map((char, index) => {
@@ -136,45 +177,52 @@ export const Typing = () => {
 
                 // Check if finished
                 if (newIndex === text.length) {
-                    handleFinish();
+                    handleFinish(nextTypedText);
                 }
             }
         },
-        [currentIndex, isFinished, isLoading, isStarted, text]
+        [currentIndex, isFinished, isLoading, isStarted, text, typedText]
     );
 
-    // Handle test completion
-    const handleFinish = async () => {
-        setIsFinished(true);
-        if (timerRef.current) {
-            clearInterval(timerRef.current);
-        }
+    const handleInputChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (isFinished || isLoading) return;
 
-        const duration = Math.floor((Date.now() - startTime) / 1000);
-        setElapsedTime(duration);
+            let nextValue = e.target.value;
+            if (nextValue.length > text.length) {
+                nextValue = nextValue.slice(0, text.length);
+            }
 
-        try {
-            const response = await typingApi.submitResult({
-                originalText: text,
-                typedText: typedText + text[currentIndex],
-                duration: duration,
-            });
-            setResult(response);
-        } catch (err) {
-            // Calculate locally if API fails
-            const errors = charStates.filter((c) => c.status === 'incorrect').length;
-            const correctChars = text.length - errors;
-            const accuracy = (correctChars / text.length) * 100;
-            const wpm = duration > 0 ? (correctChars / 5) / (duration / 60) : 0;
+            if (!isStarted && nextValue.length > 0) {
+                setIsStarted(true);
+                setStartTime(Date.now());
+            }
 
-            setResult({
-                wpm: Math.round(wpm * 100) / 100,
-                accuracy: Math.round(accuracy * 100) / 100,
-                errors,
-                correctedChars: correctChars,
-            });
-        }
-    };
+            const newIndex = nextValue.length;
+
+            setTypedText(nextValue);
+            setCurrentIndex(newIndex);
+            setCharStates(
+                text.split('').map((char, index) => {
+                    if (index < newIndex) {
+                        return {
+                            char,
+                            status: nextValue[index] === char ? 'correct' : 'incorrect',
+                        };
+                    }
+                    if (index === newIndex) {
+                        return { char, status: 'current' };
+                    }
+                    return { char, status: 'pending' };
+                })
+            );
+
+            if (newIndex === text.length) {
+                handleFinish(nextValue);
+            }
+        },
+        [isFinished, isLoading, isStarted, text]
+    );
 
     // Focus input
     const focusInput = () => {
@@ -266,6 +314,7 @@ export const Typing = () => {
                     <div
                         className={`typing-area card ${isLoading ? 'loading' : ''}`}
                         onClick={focusInput}
+                        onTouchStart={focusInput}
                     >
                         {isLoading ? (
                             <div className="loading-spinner">
@@ -289,13 +338,15 @@ export const Typing = () => {
                                     type="text"
                                     className="hidden-input"
                                     onKeyDown={handleKeyDown}
+                                    onChange={handleInputChange}
+                                    value={typedText}
                                     autoFocus
+                                    autoCapitalize="none"
+                                    autoCorrect="off"
+                                    autoComplete="off"
+                                    spellCheck={false}
+                                    inputMode="text"
                                 />
-                                {!isStarted && (
-                                    <div className="start-hint">
-                                        Click here and start typing...
-                                    </div>
-                                )}
                             </>
                         )}
                     </div>
